@@ -1,0 +1,24 @@
+The issue stems from potential pointer-events interference or z-index conflicts within the flex container. The solution involves ensuring proper event propagation and potentially adjusting z-index values to prioritize the hover effect on the intended elements.
+
+Here's a potential solution (bugSolution.css):
+
+```css
+.container {
+  display: flex;
+  /* Ensure pointer events are not blocking hover */
+  pointer-events: none; /*this could be an issue to other part of the system. use it only if it solves your problem*/
+}
+
+.container > .box {
+  width: 50px;
+  height: 50px;
+  background-color: lightblue;
+  pointer-events: auto; /* This is essential to make hover work correctly */
+}
+
+.container > .box:hover {
+  background-color: lightgreen;
+}
+```
+
+This solution ensures that the hover events are correctly handled by the `.box` elements, even within the flex container. It is crucial to test this solution in your specific context to confirm its effectiveness.
